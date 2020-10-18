@@ -1,4 +1,4 @@
-package com.ionutciuta.patterns.rules;
+package com.ionutciuta.patterns.rules.impl;
 
 import com.ionutciuta.patterns.model.Basket;
 import com.ionutciuta.patterns.model.Item;
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 
 @Component
-public class ChristmasPromotion implements IRule {
+public class ChristmasPromotion implements BasketRule {
     @Override
     public boolean matches(Basket basket) {
         return Month.DECEMBER == LocalDateTime.now().getMonth() &&
