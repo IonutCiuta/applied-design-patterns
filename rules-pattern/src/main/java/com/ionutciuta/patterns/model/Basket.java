@@ -38,6 +38,9 @@ public class Basket {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Basket:\n");
+        sb.append("Created: ");
+        sb.append(created);
+        sb.append("\n");
         items.forEach(item -> sb.append(item.toString()).append("\n"));
         sb.append("========").append("\n");
         sb.append("Total: ").append(total);

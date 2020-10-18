@@ -1,10 +1,10 @@
-package com.ionutciuta.patterns.rules;
+package com.ionutciuta.patterns.rules.impl;
 
 import com.ionutciuta.patterns.model.Basket;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DiscountForBigOrdersPromotion implements IRule {
+public class DiscountForBigOrdersPromotion implements BasketRule {
     @Override
     public boolean matches(Basket basket) {
         return basket.getTotal() > 1000.00;
