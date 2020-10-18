@@ -1,13 +1,20 @@
 ### Rules Pattern ###
 
-_TL;DR: If's are nasty and don't scale well. Use rules instead._
- 
-Sorry for the long read, I've got carried away. The code's on GitHub if you want to run it.
-https://github.com/IonutCiuta/patterns
+On multiple occasions I was tasked with checking input data - e.g. an incoming HTTP request - against multiple rules.
+Most of the time, my instinct would say "Just drag that thing through some if statements".
+
+
+However, after doing this a couple of times, I realised that here has to be a better way of doing this.
+Managing a big if-else block is not fun especially when the number of conditions you check is dynamic.
+And I don't even want to talk about using a switch statement.
+
+
+So I ended up doing a bit of studying and came across the Rule Pattern and I thought I'd share this with you.
+All of the code that you'll see is hosted [here](https://github.com/IonutCiuta/patterns).
 
 #### The problem ####
 
-Say you have a basket of items and you need to apply various pricing rules or promotions.
+You have a basket of items and you need to apply various pricing rules or promotions.
 
 e.g. Halloween 🎃 is just around the corner but... in a way, so is Christmas 🎅🏼.
 However, you'd like to only apply the Halloween promotion.
@@ -39,7 +46,7 @@ class PromoApplier {
             basket.addItem(new Item("Promo - Creepy Skeleton Suit", 0.00));
             basket.decreaseTotal(13.00);
         }
-        // Chekc if we can apply Xmas promo
+        // Check if we can apply Xmas promo
         if(Month.DECEMBER == LocalDateTime.now().getMonth() &&
                 Month.DECEMBER == basket.getCreated().getMonth() &&
                 20 < basket.getCreated().getDayOfMonth()) {
@@ -153,7 +160,7 @@ Price: 0.0
 Total: 1307.0
 ```
 
-Notice that because you used the rule engine, you got a free skeleton suit for your socially distant Halloween party 😉💀
+Notice that because you used the rule mini-engine, you got a free skeleton suit for your socially distant Halloween party 😉💀
 
 "Ok, but isn't this more complicated?" You might ask. Well, not really. Here's why:
 * you can easily add new rules or remove old ones
@@ -161,8 +168,11 @@ Notice that because you used the rule engine, you got a free skeleton suit for y
 * easy to test
 * code is cleaner and more flexibile
 
-Thanks!
+#### Related reads ####
 
+After I posted this, a colleague of mine mentioned that there might be a connection between the Rules Pattern and the Chain of Responsibility (CoR) pattern.
+While I've read about CoR on other occasions, I felt the need looked up some implementation examples and I stumbled across [this really great article](https://refactoring.guru/design-patterns/chain-of-responsibility).
+I highly recommend you give it a try. I would say that the Rule Pattern is a specialisation of the CoR pattern with some caveats.
+In the version I described, rules don't care about ordering and are applied exhaustively meaning the input is processed by all the rules.
 
-
-
+Don't forget to take a look at the code [here](https://github.com/IonutCiuta/patterns). Thanks for reading!
